@@ -9,6 +9,7 @@ public class magicshow : MonoBehaviour
     public int I_Qcount;
     public GameObject G_Final,G_magician;
     public Text TXT_max, TXT_Current;
+    public Button backButton, nextButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,7 @@ public class magicshow : MonoBehaviour
         THI_ShowQuestion();
         G_Final.SetActive(false);
         TXT_max.text = GA_Questions.Length.ToString();
+        backButton.gameObject.SetActive(false);
     }
 
     public void THI_ShowQuestion()
@@ -35,6 +37,7 @@ public class magicshow : MonoBehaviour
             G_magician.GetComponent<Animator>().SetInteger("Cond", 0);
             I_Qcount++;
             THI_ShowQuestion();
+            BUT_Enabler();
         }
         else
         {
@@ -52,10 +55,27 @@ public class magicshow : MonoBehaviour
             G_magician.GetComponent<Animator>().SetInteger("Cond", 0);
             I_Qcount--;
             THI_ShowQuestion();
+            BUT_Enabler();
         }
         else
         {
             G_Final.SetActive(true);
+        }
+    }
+    public void BUT_Enabler()
+    {
+        if (I_Qcount == 0)
+        {
+            backButton.gameObject.SetActive(false);
+        }
+        else if (I_Qcount == GA_Questions.Length - 1)
+        {
+            nextButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            backButton.gameObject.SetActive(true);
+            nextButton.gameObject.SetActive(true);
         }
     }
 }

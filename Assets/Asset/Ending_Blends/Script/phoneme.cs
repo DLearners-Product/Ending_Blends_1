@@ -12,6 +12,7 @@ public class phoneme : MonoBehaviour
     public AudioClip[] AC_clips;
     public Text TXT_max, TXT_Current;
     public GameObject G_Final;
+    public Button backButton;
 
     // Start is called before the first frame update
     void Start()
@@ -79,9 +80,6 @@ public class phoneme : MonoBehaviour
     {
         I_count--;
         AS_crt.Play();
-        if(I_count==0)
-        {
-
-        }
+       
     }
 }

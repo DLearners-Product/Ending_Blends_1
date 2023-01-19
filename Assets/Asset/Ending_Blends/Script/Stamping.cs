@@ -14,6 +14,7 @@ public class Stamping : MonoBehaviour
     public AudioSource AS_crt, AS_wrg;
     GameObject G_Selected;
     public Text TXT_Current, TXT_Max;
+    public Button backButton, nextButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class Stamping : MonoBehaviour
         TXT_Max.text = GA_Questions.Length.ToString();
         THI_ShowQuestion();
         G_Final.SetActive(false);
+        backButton.gameObject.SetActive(false);
        
     }
     private void Update()
@@ -89,6 +91,7 @@ public class Stamping : MonoBehaviour
         {
             I_Qcount++;
             THI_ShowQuestion();
+            BUT_Enabler();
         }
         else
         {
@@ -102,10 +105,28 @@ public class Stamping : MonoBehaviour
         {
             I_Qcount--;
             THI_ShowQuestion();
+            BUT_Enabler();
         }
         else
         {
             G_Final.SetActive(true);
+        }
+    }
+
+    public void BUT_Enabler()
+    {
+        if (I_Qcount == 0)
+        {
+            backButton.gameObject.SetActive(false);
+        }
+        else if (I_Qcount == GA_Questions.Length - 1)
+        {
+            nextButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            backButton.gameObject.SetActive(true);
+            nextButton.gameObject.SetActive(true);
         }
     }
 }

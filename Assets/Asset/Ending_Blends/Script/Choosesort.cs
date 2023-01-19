@@ -13,6 +13,8 @@ public class Choosesort : MonoBehaviour
     GameObject G_Selected;
     public AudioSource AS_crt, AS_wrg;
     public Text TXT_max, TXT_Current;
+    public Button backButton;
+    public Button nextButton;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class Choosesort : MonoBehaviour
         THI_ShowQuestion();
         TXT_max.text = GA_Questions.Length.ToString();
         G_Final.SetActive(false);
+        backButton.gameObject.SetActive(false);
     }
     public void THI_ShowQuestion()
     {
@@ -43,6 +46,7 @@ public class Choosesort : MonoBehaviour
         {
             I_Qcount++;
             THI_ShowQuestion();
+            BUT_Enabler();
         }else
         {
             G_Final.SetActive(true);
@@ -55,6 +59,7 @@ public class Choosesort : MonoBehaviour
         {
             I_Qcount--;
             THI_ShowQuestion();
+            BUT_Enabler();
         }
         else
         {
@@ -88,5 +93,22 @@ public class Choosesort : MonoBehaviour
     {
         G_Selected.transform.GetChild(0).GetComponent<Image>().color = Color.grey;
         B_CanClick = true;
+    }
+
+    public void BUT_Enabler()
+    {
+        if (I_Qcount == 0)
+        {
+            backButton.gameObject.SetActive(false);
+        }
+        else if (I_Qcount == GA_Questions.Length - 1)
+        {
+            nextButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            backButton.gameObject.SetActive(true);
+            nextButton.gameObject.SetActive(true);
+        }
     }
 }

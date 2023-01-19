@@ -10,6 +10,7 @@ public class Audio : MonoBehaviour
     int I_Qcount;
     public Text TXT_Current, TXT_Max;
     public GameObject G_Final;
+    public Button backButton, nextButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class Audio : MonoBehaviour
         int count = I_Qcount + 1;
         TXT_Current.text = count.ToString();
         TXT_Max.text = AC_Clips.Length.ToString();
+        backButton.gameObject.SetActive(false);
     }
     public void BUT_Next()
     {
@@ -26,6 +28,7 @@ public class Audio : MonoBehaviour
             I_Qcount++;
             int count = I_Qcount + 1;
             TXT_Current.text = count.ToString();
+            BUT_Enabler();
         }
         else
         {
@@ -39,6 +42,7 @@ public class Audio : MonoBehaviour
             I_Qcount--;
             int count = I_Qcount + 1;
             TXT_Current.text = count.ToString();
+            BUT_Enabler();
         }
         else
         {
@@ -49,5 +53,22 @@ public class Audio : MonoBehaviour
     {
         AS_Empty.clip = AC_Clips[I_Qcount];
         AS_Empty.Play();
+    }
+    // enabling back and next button during runtime
+    public void BUT_Enabler()
+    {
+        if (I_Qcount == 0)
+        {
+            backButton.gameObject.SetActive(false);
+        }
+        else if (I_Qcount == AC_Clips.Length - 1)
+        {
+            nextButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            backButton.gameObject.SetActive(true);
+            nextButton.gameObject.SetActive(true);
+        }
     }
 }

@@ -11,16 +11,18 @@ public class introduction : MonoBehaviour
     public int I_SubCount;
     public int level,I_lastcount;
     GameObject G_Bubble, G_Last;
+    public Button mainMenuButton;
     // Start is called before the first frame update
     void Start()
     {
-       
         BUT_Mainmenu();
+        mainMenuButton.gameObject.SetActive(false);
     }
     public void THI_Thumbnail(int index)
     {
         level = index;
         G_Mainmenu.SetActive(false);
+        mainMenuButton.gameObject.SetActive(true);
         G_Back.GetComponent<Button>().interactable = true;
         G_Next.GetComponent<Button>().interactable = true;
         for (int i = 0; i < GA_slides.Length; i++)
@@ -72,10 +74,12 @@ public class introduction : MonoBehaviour
            /* G_Last.transform.GetChild(I_lastcount).transform.GetChild(0).gameObject.SetActive(true);
             G_Last.transform.GetChild(I_lastcount).transform.GetChild(1).gameObject.SetActive(false);*/
         }
-       else
+       if(I_lastcount == G_Last.transform.childCount-1)
        {
-            THI_Menu();
+            //THI_Menu();
             //Invoke("THI_Menu", 1f);
+            G_Next.GetComponent<Button>().interactable = false;
+      
        }
         
     }
@@ -151,6 +155,7 @@ public class introduction : MonoBehaviour
     public void BUT_Mainmenu()
     {
         G_Mainmenu.SetActive(true);
+        mainMenuButton.gameObject.SetActive(false);
         G_Back.GetComponent<Button>().interactable = false;
         G_Next.GetComponent<Button>().interactable = false;
         for (int i = 0; i < GA_slides.Length; i++)
